@@ -14,8 +14,10 @@ public class CatalogItem : EntityBase, IAggregateRoot
     public DateTimeOffset CreateDate { get; private set; } = DateTimeOffset.Now;
     public DateTimeOffset? ModifiedDate { get; set; }
 
+    public CatalogBrand CatalogBrand { get; set; } = null!;
+
     private readonly List<CatalogGallery> _galleries = new List<CatalogGallery>();
-    public IReadOnlyCollection<CatalogGallery> Items => _galleries.AsReadOnly();
+    public IReadOnlyCollection<CatalogGallery> Galleries => _galleries.AsReadOnly();
 
     public CatalogItem(int catalogBrandId, string name, string category,
         string summary, string description, string pictureFileName,
@@ -82,7 +84,8 @@ public class CatalogItem : EntityBase, IAggregateRoot
         Price = Guard.Against.NegativeOrZero(price);
     }
 
-    public void AddOrRemoveQuantityInStock(int quantityInStock, AddOrRemoveCatalogQuantityInStock addOrRemove)
+    public void AddOrRemoveQuantityInStock(int quantityInStock, 
+        AddOrRemoveCatalogQuantityInStock addOrRemove)
     {
         Guard.Against.NegativeOrZero(quantityInStock);
 

@@ -1,11 +1,13 @@
 ﻿global using System.Reflection;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.Extensions.DependencyInjection;
-global using Ardalis.Specification.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using NovaShop.SharedKernel;
 global using NovaShop.SharedKernel.Interfaces;
 global using NovaShop.Infrastructure.Data;
 global using NovaShop.ApplicationCore;
+global using NovaShop.ApplicationCore.CatalogAggregate;
+global using Ardalis.Specification.EntityFrameworkCore;
 global using Autofac;
 global using MediatR;
 global using MediatR.Pipeline;

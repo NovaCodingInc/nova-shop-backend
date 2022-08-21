@@ -4,6 +4,8 @@ public class CatalogBrand : EntityBase, IAggregateRoot
 {
     public string Brand { get; private set; }
 
+    public ICollection<CatalogItem> CatalogItems { get; set; } = null!;
+
     public CatalogBrand(string brand)
     {
         Brand = Guard.Against.NullOrEmpty(brand);

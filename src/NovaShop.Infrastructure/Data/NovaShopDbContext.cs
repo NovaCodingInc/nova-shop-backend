@@ -1,4 +1,6 @@
-﻿namespace NovaShop.Infrastructure.Data;
+﻿using NovaShop.ApplicationCore.CatalogAggregate;
+
+namespace NovaShop.Infrastructure.Data;
 
 public class NovaShopDbContext : DbContext
 {
@@ -7,7 +9,18 @@ public class NovaShopDbContext : DbContext
     private readonly IDomainEventDispatcher? _dispatcher;
 
     public NovaShopDbContext(DbContextOptions<NovaShopDbContext> options,
-        IDomainEventDispatcher? dispatcher) : base(options) { }
+        IDomainEventDispatcher? dispatcher) : base(options)
+    {
+        _dispatcher = dispatcher;
+    }
+
+    #endregion
+
+    #region catalog
+
+    public DbSet<CatalogItem> CatalogItems => Set<CatalogItem>();
+    public DbSet<CatalogBrand> CatalogBrands => Set<CatalogBrand>();
+    public DbSet<CatalogGallery> CatalogGalleries => Set<CatalogGallery>();
 
     #endregion
 

@@ -7,7 +7,7 @@ public class CatalogGallery : EntityBase
     public string PictureFileName { get; set; } = string.Empty;
     public string PictureUri { get; set; } = string.Empty;
 
-    public CatalogItem CatalogItem { get; private set; } = null!;
+    public CatalogItem CatalogItem { get; set; } = null!;
 
     public CatalogGallery(int catalogItemId, int displayPriority)
     {
