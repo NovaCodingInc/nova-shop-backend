@@ -12,10 +12,12 @@
 
   <ItemGroup>
     <Folder Include="Interfaces\" />
+    <Folder Include="Exceptions\" />
     <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Ardalis.GuardClauses" Version="4.0.1" />
     <PackageReference Include="Autofac" Version="6.4.0" />
     <PackageReference Include="MediatR" Version="10.0.1" />
   </ItemGroup>
