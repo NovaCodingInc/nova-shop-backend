@@ -1,8 +1,12 @@
-﻿global using Microsoft.AspNetCore.Mvc;
-global using NovaShop.Web;
+﻿global using NovaShop.Web;
+global using NovaShop.Web.Controllers.Base;
+global using NovaShop.Web.Configurations;
 global using NovaShop.Infrastructure;
 global using NovaShop.Infrastructure.Data;
+global using NovaShop.ApplicationCore.ViewModels.Catalogs;
+global using NovaShop.ApplicationCore.Interfaces;
 global using NovaShop.ApplicationCore;
+global using Microsoft.AspNetCore.Mvc;
 global using Autofac.Extensions.DependencyInjection;
 global using Ardalis.ListStartupServices;
 global using Serilog;
