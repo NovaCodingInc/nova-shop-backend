@@ -78,12 +78,12 @@ public class CatalogController : ApiBaseController
     #region get brands
 
     [HttpGet("brands")]
-    [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(List<CatalogBrandDTO>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult<IEnumerable<string>>> GetAllBrands()
+    public async Task<ActionResult<List<CatalogBrandDTO>>> GetAllBrands()
     {
         var brands = await _catalogBrandRepository.ListAsync();
-        return Ok(_mapper.Map<CatalogBrandDTO>(brands));
+        return Ok(_mapper.Map<List<CatalogBrandDTO>>(brands));
     }
 
     #endregion
@@ -91,12 +91,12 @@ public class CatalogController : ApiBaseController
     #region get categories
 
     [HttpGet("categories")]
-    [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(List<CatalogCategoryDTO>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult<IEnumerable<string>>> GetAllCategory()
+    public async Task<ActionResult<List<CatalogCategoryDTO>>> GetAllCategory()
     {
         var categories = await _catalogCategory.ListAsync();
-        return Ok(_mapper.Map<CatalogCategoryDTO>(categories));
+        return Ok(_mapper.Map<List<CatalogCategoryDTO>>(categories));
     }
 
     #endregion
