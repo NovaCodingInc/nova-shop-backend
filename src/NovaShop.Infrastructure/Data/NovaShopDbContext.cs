@@ -1,6 +1,4 @@
-﻿using NovaShop.ApplicationCore.CatalogAggregate;
-
-namespace NovaShop.Infrastructure.Data;
+﻿namespace NovaShop.Infrastructure.Data;
 
 public class NovaShopDbContext : DbContext
 {

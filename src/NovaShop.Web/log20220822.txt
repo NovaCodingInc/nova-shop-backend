@@ -1,0 +1,49 @@
+2022-08-22 05:05:05.894 +04:30 [INF] Entity Framework Core 6.0.8 initialized 'NovaShopDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.8' with options: None
+2022-08-22 05:05:06.197 +04:30 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2022-08-22 05:05:06.236 +04:30 [INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2022-08-22 05:05:06.247 +04:30 [INF] Entity Framework Core 6.0.8 initialized 'NovaShopDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.8' with options: None
+2022-08-22 05:05:06.469 +04:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [CatalogItems] AS [c]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2022-08-22 05:05:06.574 +04:30 [INF] Now listening on: https://localhost:7154
+2022-08-22 05:05:06.575 +04:30 [INF] Now listening on: http://localhost:5154
+2022-08-22 05:05:06.578 +04:30 [INF] Application started. Press Ctrl+C to shut down.
+2022-08-22 05:05:06.579 +04:30 [INF] Hosting environment: Development
+2022-08-22 05:05:06.580 +04:30 [INF] Content root path: C:\.Programming\Source\nova-shop-backend\nova-shop-backend\src\NovaShop.Web\
+2022-08-22 05:05:06.983 +04:30 [INF] Request starting HTTP/2 GET https://localhost:7154/swagger/index.html - -
+2022-08-22 05:05:07.184 +04:30 [INF] Request starting HTTP/2 GET https://localhost:7154/_vs/browserLink - -
+2022-08-22 05:05:07.184 +04:30 [INF] Request starting HTTP/2 GET https://localhost:7154/_framework/aspnetcore-browser-refresh.js - -
+2022-08-22 05:05:07.187 +04:30 [INF] Request finished HTTP/2 GET https://localhost:7154/swagger/index.html - - - 200 - text/html;charset=utf-8 206.0618ms
+2022-08-22 05:05:07.190 +04:30 [INF] Request finished HTTP/2 GET https://localhost:7154/_framework/aspnetcore-browser-refresh.js - - - 200 11993 application/javascript;+charset=utf-8 6.5395ms
+2022-08-22 05:05:07.199 +04:30 [INF] Request finished HTTP/2 GET https://localhost:7154/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 15.4212ms
+2022-08-22 05:05:07.272 +04:30 [INF] Request starting HTTP/2 GET https://localhost:7154/swagger/v1/swagger.json - -
+2022-08-22 05:05:07.292 +04:30 [INF] Request finished HTTP/2 GET https://localhost:7154/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 20.4515ms
+2022-08-22 05:05:10.793 +04:30 [INF] Request starting HTTP/2 GET https://localhost:7154/swagger/index.html - -
+2022-08-22 05:05:10.799 +04:30 [INF] Request finished HTTP/2 GET https://localhost:7154/swagger/index.html - - - 200 - text/html;charset=utf-8 5.9702ms
+2022-08-22 05:05:10.808 +04:30 [INF] Request starting HTTP/2 GET https://localhost:7154/_framework/aspnetcore-browser-refresh.js - -
+2022-08-22 05:05:10.808 +04:30 [INF] Request starting HTTP/2 GET https://localhost:7154/_vs/browserLink - -
+2022-08-22 05:05:10.809 +04:30 [INF] Request finished HTTP/2 GET https://localhost:7154/_framework/aspnetcore-browser-refresh.js - - - 200 11993 application/javascript;+charset=utf-8 1.0464ms
+2022-08-22 05:05:10.815 +04:30 [INF] Request finished HTTP/2 GET https://localhost:7154/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 6.8657ms
+2022-08-22 05:05:10.877 +04:30 [INF] Request starting HTTP/2 GET https://localhost:7154/swagger/v1/swagger.json - -
+2022-08-22 05:05:10.879 +04:30 [INF] Request finished HTTP/2 GET https://localhost:7154/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 1.9691ms
+2022-08-22 05:05:16.784 +04:30 [INF] Application is shutting down...

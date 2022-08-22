@@ -16,7 +16,7 @@ public class CatalogItemEntityTypeConfiguration : IEntityTypeConfiguration<Catal
 
         builder.Property(e => e.Price).HasColumnType("decimal(18, 2)");
 
-        builder.Property(e => e.Summary).HasMaxLength(40);
+        builder.Property(e => e.Summary).HasMaxLength(400);
 
         builder.HasOne(d => d.CatalogBrand)
             .WithMany(p => p.CatalogItems)

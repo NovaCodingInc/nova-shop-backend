@@ -4,7 +4,7 @@ public class CatalogGalleryEntityTypeConfiguration : IEntityTypeConfiguration<Ca
 {
     public void Configure(EntityTypeBuilder<CatalogGallery> builder)
     {
-        builder.Property(e => e.Id).HasDefaultValueSql("(newid())");
+        builder.HasKey(e => e.Id);
 
         builder.Property(e => e.PictureFileName).HasMaxLength(150);
 

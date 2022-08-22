@@ -1,1 +1,9 @@
 ﻿global using Microsoft.AspNetCore.Mvc;
+global using NovaShop.Web;
+global using NovaShop.Infrastructure;
+global using NovaShop.Infrastructure.Data;
+global using NovaShop.ApplicationCore;
+global using Autofac.Extensions.DependencyInjection;
+global using Ardalis.ListStartupServices;
+global using Serilog;
+global using Autofac;
