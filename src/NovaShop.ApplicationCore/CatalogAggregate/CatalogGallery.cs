@@ -14,4 +14,10 @@ public class CatalogGallery : EntityBase
         CatalogItemId = catalogItemId;
         DisplayPriority = displayPriority;
     }
+
+    public void UpdatePictureUri(string? baseUri)
+    {
+        Guard.Against.NullOrEmpty(baseUri);
+        PictureUri = baseUri.Replace("[0]", this.Id.ToString());
+    }
 }

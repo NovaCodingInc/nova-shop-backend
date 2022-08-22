@@ -8,8 +8,6 @@ public class CatalogItemEntityTypeConfiguration : IEntityTypeConfiguration<Catal
 
         builder.Ignore(c => c.PictureUri);
 
-        builder.Property(e => e.Category).HasMaxLength(250);
-
         builder.Property(e => e.Name).HasMaxLength(250);
 
         builder.Property(e => e.PictureFileName).HasMaxLength(150);
@@ -23,5 +21,11 @@ public class CatalogItemEntityTypeConfiguration : IEntityTypeConfiguration<Catal
             .HasForeignKey(d => d.CatalogBrandId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("FK_CatalogItems_CatalogBrands");
+
+        builder.HasOne(d => d.CatalogCategory)
+            .WithMany(p => p.CatalogItems)
+            .HasForeignKey(d => d.CatalogCategoryId)
+            .OnDelete(DeleteBehavior.ClientSetNull)
+            .HasConstraintName("FK_CatalogItems_CatalogCategories");
     }
 }

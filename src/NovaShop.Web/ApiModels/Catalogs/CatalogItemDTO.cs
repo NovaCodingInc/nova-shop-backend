@@ -1,10 +1,10 @@
-﻿namespace NovaShop.ApplicationCore.ViewModels.Catalogs;
+﻿namespace NovaShop.Web.ApiModels.Catalogs;
 
-public class CatalogItemViewModel
+public class CatalogItemDTO
 {
     public int Id { get; set; }
-    public string? Brand { get; set; }
     public string? Name { get; set; }
+    public string? Brand { get; set; }
     public string? Category { get; set; }
     public string? Summary { get; set; }
     public string? Description { get; set; }
@@ -13,5 +13,5 @@ public class CatalogItemViewModel
     public int QuantityInStock { get; set; }
     public decimal Price { get; set; }
 
-    public List<CatalogGalleryViewModel>? Galleries { get; set; }
+    public List<CatalogGalleryDTO>? Galleries { get; set; }
 }

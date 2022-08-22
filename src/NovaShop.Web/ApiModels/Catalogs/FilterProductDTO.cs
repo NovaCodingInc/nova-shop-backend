@@ -1,23 +1,23 @@
-﻿namespace NovaShop.ApplicationCore.ViewModels.Catalogs;
+﻿namespace NovaShop.Web.ApiModels.Catalogs;
 
-public class FilterProductViewModel : BasePaging
+public class FilterProductDTO : BasePaging
 {
     public string? Search { get; set; }
     public string? Brand { get; set; }
     public string? Category { get; set; }
     public FilterProductOrderBy OrderBy { get; set; }
 
-    public List<CatalogItemViewModel>? Products { get; set; }
+    public List<CatalogItemDTO>? Products { get; set; }
 
     #region methods
 
-    public FilterProductViewModel SetProducts(List<CatalogItemViewModel> products)
+    public FilterProductDTO SetProducts(List<CatalogItemDTO> products)
     {
         Products = products;
         return this;
     }
 
-    public FilterProductViewModel SetPaging(BasePaging paging)
+    public FilterProductDTO SetPaging(BasePaging paging)
     {
         PageId = paging.PageId;
         AllEntitiesCount = paging.AllEntitiesCount;
@@ -36,11 +36,11 @@ public class FilterProductViewModel : BasePaging
 public enum FilterProductOrderBy
 {
     [Display(Name = "جدید&zwnj;ترین")]
-    CreateData_Des,
+    CreateData_Des = 0,
     [Display(Name = "قدیمی&zwnj;ترین")]
-    CreateData_Asc,
+    CreateData_Asc = 1,
     [Display(Name = "گران&zwnj;ترین")]
-    Price_Des,
+    Price_Des = 2,
     [Display(Name = "ارزان&zwnj;ترین")]
-    Price_Asc
+    Price_Asc = 3
 }

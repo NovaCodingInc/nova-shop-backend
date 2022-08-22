@@ -18,6 +18,7 @@ public class NovaShopDbContext : DbContext
 
     public DbSet<CatalogItem> CatalogItems => Set<CatalogItem>();
     public DbSet<CatalogBrand> CatalogBrands => Set<CatalogBrand>();
+    public DbSet<CatalogCategory> CatalogCategories => Set<CatalogCategory>();
     public DbSet<CatalogGallery> CatalogGalleries => Set<CatalogGallery>();
 
     #endregion

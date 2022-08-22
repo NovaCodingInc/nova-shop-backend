@@ -6,6 +6,8 @@ public class CatalogGalleryEntityTypeConfiguration : IEntityTypeConfiguration<Ca
     {
         builder.HasKey(e => e.Id);
 
+        builder.Ignore(c => c.PictureUri);
+
         builder.Property(e => e.PictureFileName).HasMaxLength(150);
 
         builder.HasOne(d => d.CatalogItem)

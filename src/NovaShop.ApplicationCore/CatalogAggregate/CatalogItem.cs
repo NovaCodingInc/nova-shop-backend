@@ -3,8 +3,8 @@
 public class CatalogItem : EntityBase, IAggregateRoot
 {
     public int CatalogBrandId { get; private set; }
+    public int CatalogCategoryId { get; private set; }
     public string Name { get; private set; }
-    public string Category { get; private set; }
     public string Summary { get; private set; }
     public string Description { get; private set; }
     public string PictureFileName { get; private set; }
@@ -15,17 +15,18 @@ public class CatalogItem : EntityBase, IAggregateRoot
     public DateTimeOffset? ModifiedDate { get; set; }
 
     public CatalogBrand CatalogBrand { get; set; } = null!;
+    public CatalogCategory CatalogCategory { get; set; } = null!;
 
     private readonly List<CatalogGallery> _galleries = new List<CatalogGallery>();
     public IReadOnlyCollection<CatalogGallery> Galleries => _galleries.AsReadOnly();
 
-    public CatalogItem(int catalogBrandId, string name, string category,
-        string summary, string description, string pictureFileName,
+    public CatalogItem(int catalogBrandId, int catalogCategoryId, string name, string summary, 
+        string description, string pictureFileName,
         int quantityInStock, decimal price)
     {
         CatalogBrandId = catalogBrandId;
+        CatalogCategoryId = catalogCategoryId;
         Name = name;
-        Category = category;
         Summary = summary;
         Description = description;
         PictureFileName = pictureFileName;
@@ -47,14 +48,14 @@ public class CatalogItem : EntityBase, IAggregateRoot
         CatalogBrandId = Guard.Against.NegativeOrZero(newBrandId);
     }
 
+    public void UpdateCategory(int newCategoryId)
+    {
+        CatalogCategoryId = Guard.Against.NegativeOrZero(newCategoryId);
+    }
+
     public void UpdateName(string name)
     {
         Name = Guard.Against.NullOrEmpty(name);
-    }
-
-    public void UpdateCategory(string category)
-    {
-        Category = Guard.Against.NullOrEmpty(category);
     }
 
     public void UpdateSummary(string summary)
@@ -72,9 +73,8 @@ public class CatalogItem : EntityBase, IAggregateRoot
         PictureFileName = Guard.Against.NullOrEmpty(pictureFileName);
     }
 
-    public void UpdatePictureUri(string pictureUri, string pictureBaseUrl)
+    public void UpdatePictureUri(string? pictureBaseUrl)
     {
-        Guard.Against.NullOrEmpty(pictureUri);
         Guard.Against.NullOrEmpty(pictureBaseUrl);
         PictureUri = pictureBaseUrl.Replace("[0]", this.Id.ToString());
     }
@@ -84,7 +84,7 @@ public class CatalogItem : EntityBase, IAggregateRoot
         Price = Guard.Against.NegativeOrZero(price);
     }
 
-    public void AddOrRemoveQuantityInStock(int quantityInStock, 
+    public void AddOrRemoveQuantityInStock(int quantityInStock,
         AddOrRemoveCatalogQuantityInStock addOrRemove)
     {
         Guard.Against.NegativeOrZero(quantityInStock);
@@ -96,12 +96,12 @@ public class CatalogItem : EntityBase, IAggregateRoot
                 this.QuantityInStock += quantityInStock;
                 break;
             case AddOrRemoveCatalogQuantityInStock.Remove:
-            {
-                // Remove here
-                int removed = Math.Min(quantityInStock, this.QuantityInStock);
-                this.QuantityInStock -= removed;
-                break;
-            }
+                {
+                    // Remove here
+                    int removed = Math.Min(quantityInStock, this.QuantityInStock);
+                    this.QuantityInStock -= removed;
+                    break;
+                }
         }
 
         var updateQuantityInStockEvent = new UpdateQuantityInStockEvent(this, quantityInStock, addOrRemove);

@@ -5,24 +5,27 @@ public class FilterCatalogSpec : Specification<CatalogItem>
     public FilterCatalogSpec(string? search = null,
         string? brand = null, string? category = null,
         int skip = 0, int take = 0,
-        FilterProductOrderBy orderBy = FilterProductOrderBy.CreateData_Des) : base()
+        int orderBy = 0) : base()
     {
         if (take == 0)
             take = int.MaxValue;
 
         switch (orderBy)
         {
-            case FilterProductOrderBy.CreateData_Des:
+            case 0:
                 Filter(search, brand, category, skip, take).OrderByDescending(i => i.CreateDate);
                 break;
-            case FilterProductOrderBy.CreateData_Asc:
+            case 1:
                 Filter(search, brand, category, skip, take).OrderBy(i => i.CreateDate);
                 break;
-            case FilterProductOrderBy.Price_Des:
+            case 2:
                 Filter(search, brand, category, skip, take).OrderByDescending(i => i.Price);
                 break;
-            case FilterProductOrderBy.Price_Asc:
+            case 3:
                 Filter(search, brand, category, skip, take).OrderBy(i => i.Price);
+                break;
+            default:
+                Filter(search, brand, category, skip, take).OrderByDescending(i => i.CreateDate);
                 break;
         }
     }
@@ -31,11 +34,13 @@ public class FilterCatalogSpec : Specification<CatalogItem>
         string? brand = null, string? category = null,
         int skip = 0, int take = 0)
     {
-        return Query.Include(c => c.CatalogBrand)
+        return Query
+            .Include(c => c.CatalogBrand)
+            .Include(c => c.CatalogCategory)
             .Where(c =>
                 (string.IsNullOrEmpty(brand) || c.CatalogBrand.Brand == brand) &&
                 (string.IsNullOrEmpty(search) || EF.Functions.Like(c.Name, $"%{search}%")) &&
-                (string.IsNullOrEmpty(category) || EF.Functions.Like(c.Category, $"%{category}%"))
+                (string.IsNullOrEmpty(category) || EF.Functions.Like(c.CatalogCategory.Category, $"%{category}%"))
             )
             .Skip(skip).Take(take);
     }

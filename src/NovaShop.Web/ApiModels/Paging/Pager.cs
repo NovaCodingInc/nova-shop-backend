@@ -1,4 +1,4 @@
-﻿namespace NovaShop.ApplicationCore.ViewModels.Paging;
+﻿namespace NovaShop.Web.ApiModels.Paging;
 
 public class Pager
 {

@@ -1,6 +1,6 @@
-﻿namespace NovaShop.ApplicationCore.ViewModels.Catalogs;
+﻿namespace NovaShop.Web.ApiModels.Catalogs;
 
-public class CatalogGalleryViewModel
+public class CatalogGalleryDTO
 {
     public int Id { get; set; }
     public int CatalogItemId { get; set; }

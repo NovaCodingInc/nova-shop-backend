@@ -1,16 +1,8 @@
-﻿global using System.ComponentModel.DataAnnotations;
-global using Microsoft.EntityFrameworkCore;
-global using NovaShop.ApplicationCore.ViewModels.Catalogs;
-global using NovaShop.ApplicationCore.ViewModels.Paging;
-global using NovaShop.ApplicationCore.Interfaces;
-global using NovaShop.ApplicationCore.Services;
-global using NovaShop.ApplicationCore.CatalogAggregate;
+﻿global using Microsoft.EntityFrameworkCore;
 global using NovaShop.ApplicationCore.CatalogAggregate.Events;
-global using NovaShop.ApplicationCore.CatalogAggregate.Specification;
 global using NovaShop.SharedKernel;
 global using NovaShop.SharedKernel.Interfaces;
 global using Ardalis.Specification;
 global using Ardalis.GuardClauses;
 global using MediatR;
 global using Autofac;
-global using AutoMapper;
