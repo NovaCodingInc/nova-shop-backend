@@ -10,18 +10,18 @@ public class SeedData
 
     public static CatalogItem CatalogItem1 = new(TestCatalogBrand.Id, TestMobileCategory.Id, "IPhone X",
         "Apple IPhone X is a expensive phone in world", 
-        "Apple IPhone X is a expensive phone in world, Apple IPhone X is a expensive phone in world, Apple IPhone X is a expensive phone in world", 
-        "1.png", 3, 31000);
+        "Apple IPhone X is a expensive phone in world, Apple IPhone X is a expensive phone in world, Apple IPhone X is a expensive phone in world",
+        "1.jpg", 3, 31000);
 
     public static readonly CatalogItem CatalogItem2 = new(TestCatalogBrand.Id, TestMobileCategory.Id, "Samsung S20 Plus", 
         "Samsung S20 Plus is a expensive phone in world",
         "Samsung S20 Plus is a expensive phone in world, Samsung S20 Plus is a expensive phone in world, Samsung S20 Plus is a expensive phone in world",
-        "2.png", 10, 26500);
+        "2.jpg", 10, 26500);
 
     public static readonly CatalogItem CatalogItem3 = new(TestCatalogBrand.Id, TestLaptopCategory.Id, "Laptop FX510 ASUS", 
         "Laptop FX510 ASUS is a expensive laptop in world",
         "Laptop FX510 ASUS is a expensive laptop in world, Laptop FX510 ASUS is a expensive laptop in world, Laptop FX510 ASUS is a expensive laptop in world",
-        "3.png", 8, 43200);
+        "3.jpg", 8, 43200);
 
     public static void Initialize(IServiceProvider serviceProvider)
     {
