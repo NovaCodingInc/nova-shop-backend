@@ -10,8 +10,8 @@ public class Pager
         {
             PageId = pageId,
             AllEntitiesCount = allEntitiesCount,
-            TakeEntity = take,
-            SkipEntity = (pageId - 1) * take,
+            Take = take,
+            Skip = (pageId - 1) * take,
             StartPage = pageId - howManyShowPageAfterAndBefore <= 0 ? 1 : pageId - howManyShowPageAfterAndBefore,
             EndPage = pageId + howManyShowPageAfterAndBefore > pageCount ? pageCount : pageId + howManyShowPageAfterAndBefore,
             HowManyShowPageAfterAndBefore = howManyShowPageAfterAndBefore,

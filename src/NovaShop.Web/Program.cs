@@ -1,4 +1,5 @@
 var builder = WebApplication.CreateBuilder(args);
+const string corsPolicy = "NovaShopCorsPolicy";
 
 // Add services to the container.
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
@@ -24,6 +25,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.Configure<CatalogSettings>(builder.Configuration);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(corsPolicy,
+        policy => policy
+            .WithOrigins(builder.Configuration.GetValue<string>("CorsPolicyOrigin"))
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
+});
 
 // add list services for diagnostic purposes - see https://github.com/ardalis/AspNetCoreStartupServices
 builder.Services.Configure<ServiceConfig>(config =>
@@ -53,6 +64,8 @@ app.UseHttpsRedirection();
 app.UseCookiePolicy();
 
 app.UseAuthorization();
+
+app.UseCors(corsPolicy);
 
 app.MapControllers();
 

@@ -27,23 +27,23 @@ public class CatalogController : ApiBaseController
     [ProducesResponseType(typeof(FilterProductDTO), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<FilterProductDTO>> GetCatalogItems([FromQuery] int pageId = 1, [FromQuery] string? search = null,
-        [FromQuery] string? brand = null, [FromQuery] string? category = null, int take = 10,
+        [FromQuery] string? brand = null, [FromQuery] string? category = null, int take = 6,
         [FromQuery] FilterProductOrderBy orderBy = FilterProductOrderBy.CreateData_Des)
     {
         var filter = new FilterProductDTO
         {
             Search = search, Category = category, Brand = brand,
             OrderBy = orderBy,
-            PageId = pageId, TakeEntity = take, HowManyShowPageAfterAndBefore = 3
+            PageId = pageId, Take = take, HowManyShowPageAfterAndBefore = 3
         };
 
         var filterCatalogSpec =
             new FilterCatalogSpec(filter.Search, filter.Brand, filter.Category,
-                (filter.PageId - 1) * filter.TakeEntity, filter.TakeEntity, (int)filter.OrderBy);
+                (filter.PageId - 1) * filter.Take, filter.Take, (int)filter.OrderBy);
 
         var pager = Pager.Build(filter.PageId,
             await _catalogItemsRepository.CountAsync(filterCatalogSpec),
-            filter.TakeEntity, filter.HowManyShowPageAfterAndBefore);
+            filter.Take, filter.HowManyShowPageAfterAndBefore);
 
         var allEntities = await _catalogItemsRepository.ListAsync(filterCatalogSpec);
         FillProductPictureUris(allEntities);

@@ -5,7 +5,6 @@ public class BasePaging
     public BasePaging()
     {
         PageId = 1;
-        TakeEntity = 10;
         HowManyShowPageAfterAndBefore = 3;
     }
 
@@ -19,15 +18,15 @@ public class BasePaging
 
     public int EndPage { get; set; }
 
-    public int TakeEntity { get; set; }
+    public int Take { get; set; }
 
-    public int SkipEntity { get; set; }
+    public int Skip { get; set; }
 
     public int HowManyShowPageAfterAndBefore { get; set; }
 
     public int GetLastPage()
     {
-        return (int)Math.Ceiling(AllEntitiesCount / (double)TakeEntity);
+        return (int)Math.Ceiling(AllEntitiesCount / (double)Take);
     }
 
     public BasePaging GetCurrentPaging()

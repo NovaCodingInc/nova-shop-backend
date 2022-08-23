@@ -24,8 +24,8 @@ public class FilterProductDTO : BasePaging
         StartPage = paging.StartPage;
         EndPage = paging.EndPage;
         HowManyShowPageAfterAndBefore = paging.HowManyShowPageAfterAndBefore;
-        TakeEntity = paging.TakeEntity;
-        SkipEntity = paging.SkipEntity;
+        Take = paging.Take;
+        Skip = paging.Skip;
         PageCount = paging.PageCount;
         return this;
     }
