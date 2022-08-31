@@ -1,3 +1,5 @@
+using Microsoft.OpenApi.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 const string corsPolicy = "NovaShopCorsPolicy";
 
@@ -20,9 +22,11 @@ builder.Services.AddDatabase(connectionString);
 builder.Services.AddAutoMapperProfile();
 
 builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.WriteIndented = builder.Environment.IsDevelopment());;
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Nova Shop Api", Version = "v1" });
+    c.EnableAnnotations();
+});
 
 builder.Services.Configure<CatalogSettings>(builder.Configuration);
 
@@ -57,7 +61,7 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
     app.UseShowAllServicesMiddleware();
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Nova Shop Api"));
 }
 
 app.UseHttpsRedirection();

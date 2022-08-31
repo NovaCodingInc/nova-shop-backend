@@ -1,4 +1,4 @@
-﻿namespace NovaShop.Web.AutoMapper;
+﻿namespace NovaShop.Web.Configuration.AutoMapper;
 
 public class MappingProfile : Profile
 {
@@ -6,7 +6,7 @@ public class MappingProfile : Profile
     {
         CreateMap<CatalogItem, CatalogItemDTO>()
             .ForMember(dest => dest.Category,
-                opts => 
+                opts =>
                     opts.MapFrom(src =>
                     src.CatalogCategory.Category))
             .ForMember(dest => dest.Brand,

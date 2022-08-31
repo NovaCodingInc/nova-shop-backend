@@ -26,15 +26,30 @@ public class CatalogController : ApiBaseController
     [HttpGet]
     [ProducesResponseType(typeof(FilterProductDTO), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult<FilterProductDTO>> GetCatalogItems([FromQuery] int pageId = 1, [FromQuery] string? search = null,
-        [FromQuery] string? brand = null, [FromQuery] string? category = null, int take = 6,
-        [FromQuery] FilterProductOrderBy orderBy = FilterProductOrderBy.CreateData_Des)
+    [SwaggerOperation(
+        Summary = "Filter list of catalog items",
+        Description = "Filter list of catalog items",
+        OperationId = "Catalog.GetCatalogItems",
+        Tags = new[] { "Catalog" })
+    ]
+    public async Task<ActionResult<FilterProductDTO>> GetCatalogItems(
+        [FromQuery, SwaggerParameter("Current page number")] int pageId = 1,
+        [FromQuery, SwaggerParameter("Search in catalog names")] string? search = null,
+        [FromQuery, SwaggerParameter("Search in catalog brands")] string? brand = null, 
+        [FromQuery, SwaggerParameter("Search in catalog category")] string? category = null,
+        [FromQuery, SwaggerParameter("Take items in current page")] int take = 6,
+        [FromQuery, SwaggerParameter(Description = "Sort list", Required = true)] FilterProductOrderBy orderBy = FilterProductOrderBy.CreateData_Des
+        )
     {
         var filter = new FilterProductDTO
         {
-            Search = search, Category = category, Brand = brand,
+            Search = search,
+            Category = category,
+            Brand = brand,
             OrderBy = orderBy,
-            PageId = pageId, Take = take, HowManyShowPageAfterAndBefore = 3
+            PageId = pageId,
+            Take = take,
+            HowManyShowPageAfterAndBefore = 3
         };
 
         var filterCatalogSpec =
@@ -59,6 +74,12 @@ public class CatalogController : ApiBaseController
     [HttpGet("{id:int}")]
     [ProducesResponseType(typeof(CatalogItemDTO), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [SwaggerOperation(
+        Summary = "Get a catalog item with all catalogGallery",
+        Description = "Get a catalog item with all catalogGallery",
+        OperationId = "Catalog.GetCatalogItemById",
+        Tags = new[] { "Catalog" })
+    ]
     public async Task<ActionResult<CatalogItemDTO>> GetCatalogItemById(int id)
     {
         var getCatalogItemSpec = new GetCatalogItemSpec(id);
@@ -80,6 +101,11 @@ public class CatalogController : ApiBaseController
     [HttpGet("brands")]
     [ProducesResponseType(typeof(List<CatalogBrandDTO>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [SwaggerOperation(
+        Summary = "Get all catalog brands",
+        Description = "Get all catalog brands",
+        OperationId = "Catalog.GetAllBrands",
+        Tags = new[] { "Catalog" })]
     public async Task<ActionResult<List<CatalogBrandDTO>>> GetAllBrands()
     {
         var brands = await _catalogBrandRepository.ListAsync();
@@ -93,6 +119,11 @@ public class CatalogController : ApiBaseController
     [HttpGet("categories")]
     [ProducesResponseType(typeof(List<CatalogCategoryDTO>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [SwaggerOperation(
+        Summary = "Get all catalog category",
+        Description = "Get all catalog category",
+        OperationId = "Catalog.GetAllCategory",
+        Tags = new[] { "Catalog" })]
     public async Task<ActionResult<List<CatalogCategoryDTO>>> GetAllCategory()
     {
         var categories = await _catalogCategory.ListAsync();

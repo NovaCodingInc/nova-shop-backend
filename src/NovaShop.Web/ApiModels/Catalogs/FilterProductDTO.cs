@@ -3,8 +3,11 @@
 public class FilterProductDTO : BasePaging
 {
     public string? Search { get; set; }
+
     public string? Brand { get; set; }
+
     public string? Category { get; set; }
+
     public FilterProductOrderBy OrderBy { get; set; }
 
     public List<CatalogItemDTO>? Products { get; set; }

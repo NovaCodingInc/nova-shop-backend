@@ -1,4 +1,4 @@
-﻿using NovaShop.Web.AutoMapper;
+﻿using NovaShop.Web.Configuration.AutoMapper;
 
 namespace NovaShop.Web.Configurations;
 

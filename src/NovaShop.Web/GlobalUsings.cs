@@ -1,4 +1,5 @@
 ﻿global using System.ComponentModel.DataAnnotations;
+global using System.Text.Json.Serialization;
 global using NovaShop.Web;
 global using NovaShop.Web.Controllers.Base;
 global using NovaShop.Web.Configurations;
@@ -12,6 +13,7 @@ global using NovaShop.SharedKernel.Interfaces;
 global using NovaShop.Web.ApiModels.Catalogs;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.Extensions.Options;
+global using Swashbuckle.AspNetCore.Annotations;
 global using Autofac.Extensions.DependencyInjection;
 global using Ardalis.ListStartupServices;
 global using Serilog;

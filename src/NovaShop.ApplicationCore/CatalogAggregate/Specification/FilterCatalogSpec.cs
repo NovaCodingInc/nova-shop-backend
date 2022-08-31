@@ -13,19 +13,24 @@ public class FilterCatalogSpec : Specification<CatalogItem>
         switch (orderBy)
         {
             case 0:
-                Filter(search, brand, category, skip, take).OrderByDescending(i => i.CreateDate);
+                Filter(search, brand, category, skip, take)
+                    .OrderByDescending(i => i.CreateDate);
                 break;
             case 1:
-                Filter(search, brand, category, skip, take).OrderBy(i => i.CreateDate);
+                Filter(search, brand, category, skip, take)
+                    .OrderBy(i => i.CreateDate);
                 break;
             case 2:
-                Filter(search, brand, category, skip, take).OrderByDescending(i => i.Price);
+                Filter(search, brand, category, skip, take)
+                    .OrderByDescending(i => i.Price);
                 break;
             case 3:
-                Filter(search, brand, category, skip, take).OrderBy(i => i.Price);
+                Filter(search, brand, category, skip, take)
+                    .OrderBy(i => i.Price);
                 break;
             default:
-                Filter(search, brand, category, skip, take).OrderByDescending(i => i.CreateDate);
+                Filter(search, brand, category, skip, take)
+                    .OrderByDescending(i => i.CreateDate);
                 break;
         }
     }
