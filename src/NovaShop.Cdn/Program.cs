@@ -1,16 +1,4 @@
-var builder = WebApplication.CreateBuilder(new WebApplicationOptions()
-{
-    Args = args,
-    WebRootPath = "pictures",
-    ContentRootPath = Directory.GetCurrentDirectory()
-});
-
-// Create pictures directory
-if (!Directory.Exists(".\\pictures"))
-    Directory.CreateDirectory(".\\pictures");
-
-if (!Directory.Exists(".\\pictures\\gallery"))
-    Directory.CreateDirectory(".\\pictures\\gallery");
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
@@ -27,6 +15,8 @@ builder.Services.AddCors(cors => cors.AddPolicy("blazor-upload-picture-cors", po
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
+app.UseStaticFiles();
 
 app.UseAuthorization();
 
