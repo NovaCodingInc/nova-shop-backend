@@ -1,5 +1,9 @@
-﻿namespace NovaShop.Infrastructure.Data;
+﻿using NovaShop.ApplicationCore.CustomerAggregate;
 
+namespace NovaShop.Infrastructure.Data;
+
+// Add-Migration AddCustomer -Context NovaShopDbContext -o "Migrations"
+// Update-Database -Context NovaShopDbContext
 public class NovaShopDbContext : DbContext
 {
     #region constrcutor
@@ -23,12 +27,18 @@ public class NovaShopDbContext : DbContext
 
     #endregion
 
+    #region customer
+
+    public DbSet<Customer> Customers => Set<Customer>();
+
+    #endregion
+
     #region on model creating
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        base.OnModelCreating(modelBuilder);
     }
 
     #endregion

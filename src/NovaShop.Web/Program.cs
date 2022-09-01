@@ -21,6 +21,8 @@ builder.Services.AddDatabase(connectionString);
 
 builder.Services.AddAutoMapperProfile();
 
+builder.Services.AddIdentity(builder.Configuration);
+
 builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.WriteIndented = builder.Environment.IsDevelopment());;
 builder.Services.AddSwaggerGen(c =>
 {

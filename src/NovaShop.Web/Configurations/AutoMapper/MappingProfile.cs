@@ -1,4 +1,4 @@
-﻿namespace NovaShop.Web.Configuration.AutoMapper;
+﻿namespace NovaShop.Web.Configurations.AutoMapper;
 
 public class MappingProfile : Profile
 {

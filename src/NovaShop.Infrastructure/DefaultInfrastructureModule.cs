@@ -1,4 +1,5 @@
-﻿using Module = Autofac.Module;
+﻿using NovaShop.Infrastructure.Identity.Services;
+using Module = Autofac.Module;
 
 namespace NovaShop.Infrastructure;
 
@@ -80,6 +81,10 @@ public class DefaultInfrastructureModule : Module
               .AsClosedTypesOf(mediatrOpenType)
               .AsImplementedInterfaces();
         }
+
+        builder.RegisterType<JwtService>()
+            .As<IJwtService>()
+            .InstancePerLifetimeScope();
     }
 
     private void RegisterDevelopmentOnlyDependencies(ContainerBuilder builder)

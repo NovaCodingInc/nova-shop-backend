@@ -12,6 +12,7 @@ global using NovaShop.SharedKernel;
 global using NovaShop.SharedKernel.Interfaces;
 global using NovaShop.Infrastructure.Data;
 global using NovaShop.Infrastructure.Identity.Users;
+global using NovaShop.Infrastructure.Identity;
 global using NovaShop.ApplicationCore;
 global using NovaShop.ApplicationCore.CatalogAggregate;
 global using Ardalis.Specification.EntityFrameworkCore;
