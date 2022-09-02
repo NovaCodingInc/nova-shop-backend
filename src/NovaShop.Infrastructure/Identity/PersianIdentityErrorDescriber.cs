@@ -13,7 +13,7 @@ public class PersianIdentityErrorDescriber : IdentityErrorDescriber
         => new IdentityError()
         {
             Code = nameof(DuplicateUserName),
-            Description = $"توسط شخص دیگری انتخاب شده است '{userName}' نام کاربری"
+            Description = $"توسط شخص دیگری انتخاب شده است '{userName}' ایمیل"
         };
 
     public override IdentityError InvalidEmail(string email)

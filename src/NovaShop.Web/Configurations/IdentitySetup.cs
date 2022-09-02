@@ -17,7 +17,7 @@ public static class IdentitySetup
             {
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequiredUniqueChars = 0;
-                options.User.RequireUniqueEmail = true;
+                options.User.RequireUniqueEmail = false;
                 options.User.AllowedUserNameCharacters =
                     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._";
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
