@@ -29,4 +29,8 @@
     <ProjectReference Include="..\NovaShop.Infrastructure\NovaShop.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Logs\" />
+  </ItemGroup>
+
 </Project>
