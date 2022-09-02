@@ -18,8 +18,6 @@ public static class IdentitySetup
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequiredUniqueChars = 0;
                 options.User.RequireUniqueEmail = false;
-                options.User.AllowedUserNameCharacters =
-                    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._";
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
             })
             .AddEntityFrameworkStores<AppIdentityDbContext>()
@@ -30,7 +28,7 @@ public static class IdentitySetup
         services.Configure<JwtAppSetting>(appSettingsSection);
 
         var appSettings = appSettingsSection.Get<JwtAppSetting>();
-        var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+        var key = Encoding.UTF8.GetBytes(appSettings.Secret);
 
         services.AddAuthentication(x =>
         {

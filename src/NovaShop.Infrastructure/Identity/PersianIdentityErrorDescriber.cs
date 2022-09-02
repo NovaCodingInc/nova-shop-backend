@@ -12,7 +12,7 @@ public class PersianIdentityErrorDescriber : IdentityErrorDescriber
     public override IdentityError DuplicateUserName(string userName)
         => new IdentityError()
         {
-            Code = nameof(DuplicateUserName),
+            Code = nameof(DuplicateEmail),
             Description = $"توسط شخص دیگری انتخاب شده است '{userName}' ایمیل"
         };
 
@@ -82,8 +82,8 @@ public class PersianIdentityErrorDescriber : IdentityErrorDescriber
     public override IdentityError InvalidUserName(string userName)
         => new IdentityError()
         {
-            Code = nameof(InvalidUserName),
-            Description = $"معتبر نیست '{userName}' نام کاربری"
+            Code = nameof(InvalidEmail),
+            Description = $"معتبر نیست '{userName}' ایمیل"
         };
 
     public override IdentityError UserNotInRole(string role)

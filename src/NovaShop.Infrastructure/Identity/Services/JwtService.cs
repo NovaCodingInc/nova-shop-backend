@@ -25,13 +25,13 @@ public class JwtService : IJwtService
         identityClaims.AddClaims(claims);
 
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+        var key = Encoding.UTF8.GetBytes(_appSettings.Secret);
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = identityClaims,
             Issuer = _appSettings.Issuer,
             Audience = _appSettings.ValidAt,
-            Expires = DateTime.UtcNow.AddHours(_appSettings.Expiration),
+            Expires = DateTime.UtcNow.AddDays(_appSettings.Expiration),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
 

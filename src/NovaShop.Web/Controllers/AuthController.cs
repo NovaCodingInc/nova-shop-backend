@@ -34,10 +34,10 @@ public class AuthController : ApiBaseController
     ]
     public async Task<ActionResult<RegisterCustomerResponse>> Register([FromBody] RegisterCustomerRequest request)
     {
-        if (!ModelState.IsValid || _signInManager.IsSignedIn(User)) 
-            return BadRequest();
-
         var response = new RegisterCustomerResponse(false);
+
+        if (!ModelState.IsValid || User.Identity!.IsAuthenticated)
+            return BadRequest(response);
 
         var user = new ApplicationUser()
         {
@@ -47,7 +47,7 @@ public class AuthController : ApiBaseController
             EmailConfirmed = false,
         };
 
-        var result = await _userManager.CreateAsync(user);
+        var result = await _userManager.CreateAsync(user, request.Password);
         if (result.Succeeded)
         {
             // TODO: Maybe you want send confirm email here
@@ -60,6 +60,43 @@ public class AuthController : ApiBaseController
         foreach (var error in result.Errors)
         {
             response.Errors.Add(new RegisterCustomerErrorResponse(error.Code, error.Description));
+        }
+
+        return BadRequest(response);
+    }
+
+    #endregion
+
+    #region login
+
+    [HttpPost("Login")]
+    [ProducesResponseType(typeof(LoginCustomerResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [SwaggerOperation(
+        Summary = "Login user",
+        Description = "Login user",
+        OperationId = "Auth.Login",
+        Tags = new[] { "Auth" })
+    ]
+    public async Task<ActionResult<LoginCustomerResponse>> Login(LoginCustomerRequest request)
+    {
+        var response = new LoginCustomerResponse(false);
+
+        if (!ModelState.IsValid || User.Identity!.IsAuthenticated)
+            return BadRequest(response);
+
+        var user = await _userManager.FindByEmailAsync(request.Email);
+        if (user == null) return BadRequest(response);
+
+        var signInResult = await _signInManager.CheckPasswordSignInAsync(user, request.Password, request.RememberMe);
+
+        if (signInResult.Succeeded)
+        {
+            response.Succeeded = true;
+            response.Email = request.Email;
+            response.Token = await _jwtService.GenerateJwt(user.Email);
+
+            return Ok(response);
         }
 
         return BadRequest(response);
