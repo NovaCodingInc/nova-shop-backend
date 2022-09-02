@@ -18,6 +18,6 @@ public class CatalogGallery : EntityBase
     public void UpdatePictureUri(string? baseUri)
     {
         Guard.Against.NullOrEmpty(baseUri);
-        PictureUri = baseUri.Replace("[0]", this.Id.ToString());
+        PictureUri = baseUri.Replace("[0]", this.PictureFileName);
     }
 }

@@ -15,7 +15,7 @@ public static class IdentitySetup
     {
         services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
-                options.SignIn.RequireConfirmedAccount = true;
+                options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequiredUniqueChars = 0;
                 options.User.RequireUniqueEmail = true;
                 options.User.AllowedUserNameCharacters =
@@ -23,7 +23,8 @@ public static class IdentitySetup
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
             })
             .AddEntityFrameworkStores<AppIdentityDbContext>()
-            .AddDefaultTokenProviders();
+            .AddDefaultTokenProviders()
+            .AddErrorDescriber<PersianIdentityErrorDescriber>();
 
         var appSettingsSection = configuration.GetSection("JwtAppSetting");
         services.Configure<JwtAppSetting>(appSettingsSection);

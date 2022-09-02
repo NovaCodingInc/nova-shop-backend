@@ -42,16 +42,16 @@ public class AuthController : ApiBaseController
         var user = new ApplicationUser()
         {
             Email = request.Email,
-            UserName = request.Email.Split("@")[0].Split(".")[0],
+            UserName = request.Email,
             CreateDate = DateTime.Now,
-            EmailConfirmed = true,
+            EmailConfirmed = false,
         };
-
-        // TODO: Maybe you want send confirm email here
 
         var result = await _userManager.CreateAsync(user);
         if (result.Succeeded)
         {
+            // TODO: Maybe you want send confirm email here
+
             response.Succeeded = true;
             await _mediator.Send(new RegisterCustomerCommand(user.Id));
             return Ok(response);
