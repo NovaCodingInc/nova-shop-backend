@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <Folder Include="Identity\Authorization\ClaimBasedAuthorization\MvcUserAccessClaims\ClaimValues\" />
+    <Folder Include="Identity\Extensions\" />
     <Folder Include="Identity\Users\" />
     <Folder Include="Identity\Services\" />
   </ItemGroup>

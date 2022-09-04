@@ -1,4 +1,6 @@
-﻿namespace NovaShop.Web.Controllers;
+﻿using NovaShop.Infrastructure.Identity.Extensions;
+
+namespace NovaShop.Web.Controllers;
 
 public class AuthController : ApiBaseController
 {
@@ -100,6 +102,36 @@ public class AuthController : ApiBaseController
         }
 
         return BadRequest(response);
+    }
+
+    #endregion
+
+    #region check auth
+
+    [HttpPost("Check")]
+    [ProducesResponseType(typeof(CheckAuthCustomerResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [SwaggerOperation(
+        Summary = "Check user auth",
+        Description = "Check user auth",
+        OperationId = "Auth.CheckAuthentication",
+        Tags = new[] { "Auth" })
+    ]
+    public async Task<ActionResult<CheckAuthCustomerResponse>> CheckAuthentication()
+    {
+        var response = new CheckAuthCustomerResponse(false);
+
+        if (!User.Identity!.IsAuthenticated) 
+            return Unauthorized(response);
+
+        var user = await _userManager.FindByIdAsync(User.GetUserId());
+
+        if (user == null) 
+            return Unauthorized(response);
+
+        response.Succeeded = true;
+        response.Email = user.Email;
+        return Ok(response);
     }
 
     #endregion
