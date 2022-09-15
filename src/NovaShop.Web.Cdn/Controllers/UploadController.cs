@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
-namespace NovaShop.Cdn.Controllers;
+namespace NovaShop.Web.Cdn.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]

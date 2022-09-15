@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NovaShop.ApplicationCore", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NovaShop.SharedKernel", "src\NovaShop.SharedKernel\NovaShop.SharedKernel.csproj", "{D2D0C87E-C810-4117-843E-8081E688D95F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NovaShop.Cdn", "src\NovaShop.Cdn\NovaShop.Cdn.csproj", "{B6AFD896-B19F-4477-825B-53415914DCA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NovaShop.Web.Cdn", "src\NovaShop.Web.Cdn\NovaShop.Web.Cdn.csproj", "{B6AFD896-B19F-4477-825B-53415914DCA8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{6F680310-AFA8-4AB1-A425-C8C1DE2B9614}"
 EndProject

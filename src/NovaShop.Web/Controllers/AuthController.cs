@@ -1,6 +1,4 @@
-﻿using NovaShop.Infrastructure.Identity.Extensions;
-
-namespace NovaShop.Web.Controllers;
+﻿namespace NovaShop.Web.Controllers;
 
 public class AuthController : ApiBaseController
 {

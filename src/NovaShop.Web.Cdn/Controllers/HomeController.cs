@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace NovaShop.Cdn.Controllers;
+namespace NovaShop.Web.Cdn.Controllers;
 
 public class HomeController : Controller
 {

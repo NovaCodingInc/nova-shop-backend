@@ -6,9 +6,6 @@ const string corsPolicy = "NovaShopCorsPolicy";
 // Add services to the container.
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
-builder.Host.UseSerilog((_, config) => 
-    config.ReadFrom.Configuration(builder.Configuration));
-
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {
     options.CheckConsentNeeded = context => true;
@@ -69,7 +66,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(corsPolicy,
         policy => policy
-            .WithOrigins(builder.Configuration.GetValue<string>("CorsPolicyOrigin"))
+            .SetIsOriginAllowed((host) => true)
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials());
