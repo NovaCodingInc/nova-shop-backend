@@ -1,4 +1,5 @@
 ﻿using NovaShop.ApplicationCore.CustomerAggregate;
+using NovaShop.ApplicationCore.OrderAggregate;
 
 namespace NovaShop.Infrastructure.Data;
 
@@ -30,6 +31,13 @@ public class NovaShopDbContext : DbContext
     #region customer
 
     public DbSet<Customer> Customers => Set<Customer>();
+
+    #endregion
+
+    #region order
+
+    public DbSet<Order> Orders => Set<Order>();
+    public DbSet<OrderDetail> OrderDetails => Set<OrderDetail>();
 
     #endregion
 
