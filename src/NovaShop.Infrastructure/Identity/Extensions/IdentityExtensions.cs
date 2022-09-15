@@ -6,13 +6,8 @@ public static class IdentityExtensions
 {
     public static string GetUserId(this ClaimsPrincipal? claimsPrincipal)
     {
-        if (claimsPrincipal != null)
-        {
-            var data = claimsPrincipal.Claims.SingleOrDefault(s => s.Type == ClaimTypes.NameIdentifier);
-            if (data != null) return data.Value;
-        }
-
-        return string.Empty;
+        var data = claimsPrincipal?.Claims.SingleOrDefault(s => s.Type == ClaimTypes.NameIdentifier);
+        return data != null ? data.Value : string.Empty;
     }
 
     public static string GetUserId(this IPrincipal principal)

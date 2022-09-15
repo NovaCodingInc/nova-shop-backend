@@ -1,16 +1,20 @@
-﻿namespace NovaShop.ApplicationCore.OrderAggregate;
+﻿using NovaShop.ApplicationCore.CatalogAggregate;
+
+namespace NovaShop.ApplicationCore.OrderAggregate;
 
 public class OrderDetail : EntityBase
 {
     public int OrderId { get; private set; }
-    public int ProductId { get; private set; }
+    public int CatalogItemId { get; private set; }
     public int Count { get; private set; }
     public decimal ProductPrice { get; private set; }
 
-    public OrderDetail(int orderId, int productId, int count, decimal productPrice)
+    private OrderDetail() { }
+
+    public OrderDetail(int orderId, int catalogItemId, int count, decimal productPrice)
     {
         OrderId = orderId;
-        ProductId = productId;
+        CatalogItemId = catalogItemId;
         Count = count;
         ProductPrice = productPrice;
     }
@@ -22,12 +26,19 @@ public class OrderDetail : EntityBase
 
     public void UpdateProduct(int productId)
     {
-        ProductId = Guard.Against.NegativeOrZero(productId, nameof(productId));
+        CatalogItemId = Guard.Against.NegativeOrZero(productId, nameof(productId));
     }
 
     public void UpdateCount(int count)
     {
         Count = Guard.Against.NegativeOrZero(count, nameof(count));
+    }
+
+    public void AddQuantity(int quantity)
+    {
+        Guard.Against.OutOfRange(quantity, nameof(quantity), 0, int.MaxValue);
+
+        Count += quantity;
     }
 
     public void UpdateProductPrice(int productPrice)

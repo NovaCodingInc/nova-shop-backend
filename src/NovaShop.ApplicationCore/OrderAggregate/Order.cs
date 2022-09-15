@@ -12,17 +12,27 @@ public class Order : EntityBase, IAggregateRoot
 
     public IReadOnlyCollection<OrderDetail> OrderDetails => _orderDetails.AsReadOnly();
 
-    public Order(string customerId, decimal totalPrice, bool isPaid, DateTimeOffset? modifiedDate)
+    public Order(string customerId, decimal totalPrice, bool isPaid)
     {
         CustomerId = customerId;
         TotalPrice = totalPrice;
         IsPaid = isPaid;
     }
 
-    public void AddOrderDetail(OrderDetail newDetail)
+    public void AddOrderDetail(int catalogItemId, decimal productPrice, int quantity = 1)
     {
-        Guard.Against.Null(newDetail, nameof(newDetail));
-        _orderDetails.Add(newDetail);
+        if (IsPaid) return;
+        Guard.Against.NegativeOrZero(catalogItemId, nameof(catalogItemId));
+        Guard.Against.Negative(productPrice, nameof(productPrice));
+        Guard.Against.Negative(quantity, nameof(quantity));
+
+        if (_orderDetails.All(i => i.CatalogItemId != catalogItemId))
+        {
+            _orderDetails.Add(new OrderDetail(this.Id, catalogItemId, quantity, productPrice));
+            return;
+        }
+        var existingItem = _orderDetails.FirstOrDefault(i => i.OrderId == this.Id);
+        existingItem?.AddQuantity(quantity);
 
         // Register new domain event
     }
