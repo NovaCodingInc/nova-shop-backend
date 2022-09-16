@@ -28,10 +28,11 @@ public class Order : EntityBase, IAggregateRoot
 
         if (_orderDetails.All(i => i.CatalogItemId != catalogItemId))
         {
-            _orderDetails.Add(new OrderDetail(this.Id, catalogItemId, quantity, productPrice));
+            _orderDetails.Add(new OrderDetail(Id, catalogItemId, quantity, productPrice));
             return;
         }
-        var existingItem = _orderDetails.FirstOrDefault(i => i.OrderId == this.Id);
+
+        var existingItem = _orderDetails.FirstOrDefault(i => i.OrderId == Id && i.CatalogItemId == catalogItemId);
         existingItem?.AddQuantity(quantity);
 
         // Register new domain event

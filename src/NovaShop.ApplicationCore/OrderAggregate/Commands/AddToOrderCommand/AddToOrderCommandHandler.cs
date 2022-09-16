@@ -30,11 +30,11 @@ public class AddToOrderCommandHandler : IRequestHandler<AddToOrderCommand>
                 // after finally calculate totalPrice
                 order = new Order(request.CustomerId, 0, false);
                 await _orderRepository.AddAsync(order, cancellationToken);
-                await _orderRepository.SaveChangesAsync(cancellationToken);
             }
 
             // after pay calculate product price
             order.AddOrderDetail(request.CatalogItemId, 0, request.Count);
+            await _orderRepository.UpdateAsync(order, cancellationToken);
         }
 
         return Unit.Value;

@@ -9,6 +9,8 @@ public class OrderDetail : EntityBase
     public int Count { get; private set; }
     public decimal ProductPrice { get; private set; }
 
+    public CatalogItem CatalogItem { get; set; } = null!;
+
     private OrderDetail() { }
 
     public OrderDetail(int orderId, int catalogItemId, int count, decimal productPrice)

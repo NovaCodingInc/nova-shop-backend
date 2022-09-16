@@ -73,10 +73,10 @@ public class CatalogItem : EntityBase, IAggregateRoot
         PictureFileName = Guard.Against.NullOrEmpty(pictureFileName);
     }
 
-    public void UpdatePictureUri(string? pictureBaseUrl)
+    public string UpdatePictureUri(string? pictureBaseUrl)
     {
         Guard.Against.NullOrEmpty(pictureBaseUrl);
-        PictureUri = pictureBaseUrl.Replace("[0]", this.PictureFileName);
+        return PictureUri = pictureBaseUrl.Replace("[0]", this.PictureFileName);
     }
 
     public void UpdatePrice(int price)
