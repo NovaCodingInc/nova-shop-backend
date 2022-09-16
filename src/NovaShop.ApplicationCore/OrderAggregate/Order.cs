@@ -1,6 +1,4 @@
-﻿using NovaShop.ApplicationCore.CatalogAggregate;
-
-namespace NovaShop.ApplicationCore.OrderAggregate;
+﻿namespace NovaShop.ApplicationCore.OrderAggregate;
 
 public class Order : EntityBase, IAggregateRoot
 {

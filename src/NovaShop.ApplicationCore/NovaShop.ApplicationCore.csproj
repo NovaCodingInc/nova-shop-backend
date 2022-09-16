@@ -15,6 +15,7 @@
     <Folder Include="Exceptions\" />
     <Folder Include="OrderAggregate\Commands\AddToOrderCommand\" />
     <Folder Include="OrderAggregate\Commands\DeleteOrderDetail\" />
+    <Folder Include="OrderAggregate\Commands\UpdateOrderDetail\" />
     <Folder Include="OrderAggregate\Queries\GetCustomerBasket\" />
     <Folder Include="OrderAggregate\Specification\" />
     <Folder Include="Services\" />

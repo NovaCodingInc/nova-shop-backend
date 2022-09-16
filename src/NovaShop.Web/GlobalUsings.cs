@@ -16,6 +16,8 @@ global using NovaShop.ApplicationCore.CatalogAggregate;
 global using NovaShop.ApplicationCore.CatalogAggregate.Specification;
 global using NovaShop.ApplicationCore.CustomerAggregate.Commands;
 global using NovaShop.ApplicationCore.OrderAggregate.Commands.AddToOrderCommand;
+global using NovaShop.ApplicationCore.OrderAggregate.Commands.DeleteOrderDetail;
+global using NovaShop.ApplicationCore.OrderAggregate.Queries.GetCustomerBasket;
 global using NovaShop.SharedKernel.Interfaces;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.Extensions.Options;
