@@ -1,4 +1,6 @@
-﻿using NovaShop.ApplicationCore.OrderAggregate.Queries.GetCustomerBasket;
+﻿using NovaShop.ApplicationCore.OrderAggregate.Commands.DeleteOrderDetail;
+using NovaShop.ApplicationCore.OrderAggregate.Queries.GetCustomerBasket;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace NovaShop.Web.Controllers;
 
@@ -78,7 +80,22 @@ public class BasketController : ApiBaseController
 
     #region delete basket item
 
-
+    [HttpDelete("{catalogItemId:int}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [SwaggerOperation(
+        Summary = "Delete basket item",
+        Description = "Delete basket item",
+        OperationId = "Basket.DeleteBasketItem",
+        Tags = new[] { "Basket" })
+    ]
+    public async Task<IActionResult> DeleteBasketItem(int catalogItemId)
+    {
+        var userId = User.GetUserId();
+        var deleteCommand = new DeleteOrderDetailCommand(userId, catalogItemId); 
+        await _mediator.Send(deleteCommand);
+        return Ok();
+    }
 
     #endregion
 }

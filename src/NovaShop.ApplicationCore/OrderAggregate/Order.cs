@@ -1,4 +1,6 @@
-﻿namespace NovaShop.ApplicationCore.OrderAggregate;
+﻿using NovaShop.ApplicationCore.CatalogAggregate;
+
+namespace NovaShop.ApplicationCore.OrderAggregate;
 
 public class Order : EntityBase, IAggregateRoot
 {
@@ -36,6 +38,12 @@ public class Order : EntityBase, IAggregateRoot
         existingItem?.AddQuantity(quantity);
 
         // Register new domain event
+    }
+
+    public void DeleteOrderDetail(OrderDetail detail)
+    {
+        Guard.Against.Null(detail, nameof(detail));
+        _orderDetails.Remove(detail);
     }
 
     public void SetTotalPrice()

@@ -2,6 +2,8 @@
 
 public class GetCustomerBasketQueryHandler : IRequestHandler<GetCustomerBasketQuery, Order>
 {
+    #region constructor
+
     private readonly ILogger<GetCustomerBasketQueryHandler> _logger;
     private readonly IRepository<Order> _orderRepository;
 
@@ -11,6 +13,8 @@ public class GetCustomerBasketQueryHandler : IRequestHandler<GetCustomerBasketQu
         _logger = logger;
         _orderRepository = orderRepository;
     }
+
+    #endregion
 
     public async Task<Order> Handle(GetCustomerBasketQuery request, CancellationToken cancellationToken)
     {
