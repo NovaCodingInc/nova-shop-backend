@@ -12,4 +12,5 @@ public class BasketItemDTO
     public string? PictureUri { get; set; }
     public int Count { get; set; }
     public decimal Price { get; set; }
+    public decimal TotalPrice { get; set; }
 }

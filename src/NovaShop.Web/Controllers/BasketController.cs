@@ -1,6 +1,4 @@
-﻿using NovaShop.ApplicationCore.OrderAggregate.Commands.UpdateOrderDetail;
-
-namespace NovaShop.Web.Controllers;
+﻿namespace NovaShop.Web.Controllers;
 
 [Authorize]
 public class BasketController : ApiBaseController
@@ -42,7 +40,8 @@ public class BasketController : ApiBaseController
                 CatalogItemName = o.CatalogItem.Name,
                 Count = o.Count,
                 PictureUri = o.CatalogItem.UpdatePictureUri(_catalogSettings.CatalogPictureBaseUri),
-                Price = (o.CatalogItem.Price * o.Count)
+                Price = o.CatalogItem.Price,
+                TotalPrice = (o.CatalogItem.Price * o.Count)
             }).ToList()
         };
         return Ok(basket);
