@@ -24,7 +24,6 @@ global using Microsoft.Extensions.Options;
 global using Microsoft.AspNetCore.Identity;
 global using Microsoft.AspNetCore.Authorization;
 global using Swashbuckle.AspNetCore.Annotations;
-global using Ardalis.ListStartupServices;
 global using Autofac.Extensions.DependencyInjection;
 global using Autofac;
 global using AutoMapper;

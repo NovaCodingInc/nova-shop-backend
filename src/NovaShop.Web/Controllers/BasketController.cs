@@ -36,8 +36,6 @@ public class BasketController : ApiBaseController
         var order = await _mediator.Send(query);
         var basket = new GetCustomerBasketDTO
         {
-            IsPaid = false,
-            CustomerId = order.CustomerId,
             Items = order.OrderDetails.Select(o => new BasketItemDTO
             {
                 CatalogItemId = o.CatalogItemId,

@@ -1,7 +1,4 @@
-﻿using NovaShop.ApplicationCore.CustomerAggregate;
-using NovaShop.ApplicationCore.OrderAggregate;
-
-namespace NovaShop.Infrastructure.Data;
+﻿namespace NovaShop.Infrastructure.Data;
 
 // Add-Migration AddCustomer -Context NovaShopDbContext -o "Migrations"
 // Update-Database -Context NovaShopDbContext

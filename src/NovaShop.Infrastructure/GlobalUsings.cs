@@ -15,6 +15,8 @@ global using NovaShop.Infrastructure.Identity.Users;
 global using NovaShop.Infrastructure.Identity;
 global using NovaShop.ApplicationCore;
 global using NovaShop.ApplicationCore.CatalogAggregate;
+global using NovaShop.ApplicationCore.CustomerAggregate;
+global using NovaShop.ApplicationCore.OrderAggregate;
 global using Ardalis.Specification.EntityFrameworkCore;
 global using Autofac;
 global using MediatR;

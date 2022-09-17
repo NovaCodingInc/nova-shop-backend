@@ -2,8 +2,6 @@
 
 public class GetCustomerBasketDTO
 {
-    public string? CustomerId { get; set; }
-    public bool IsPaid { get; set; }
     public List<BasketItemDTO>? Items { get; set; }
 }
 

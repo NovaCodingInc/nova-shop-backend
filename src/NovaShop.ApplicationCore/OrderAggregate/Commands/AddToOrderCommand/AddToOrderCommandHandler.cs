@@ -2,17 +2,19 @@
 
 public class AddToOrderCommandHandler : IRequestHandler<AddToOrderCommand>
 {
-    private readonly ILogger<AddToOrderCommandHandler> _logger;
+    #region constructor
+
     private readonly IRepository<Order> _orderRepository;
     private readonly IRepository<CatalogItem> _catalogItemRepository;
 
-    public AddToOrderCommandHandler(ILogger<AddToOrderCommandHandler> logger,
-        IRepository<Order> orderRepository, IRepository<CatalogItem> catalogItemRepository)
+    public AddToOrderCommandHandler(IRepository<Order> orderRepository, 
+        IRepository<CatalogItem> catalogItemRepository)
     {
-        _logger = logger;
         _orderRepository = orderRepository;
         _catalogItemRepository = catalogItemRepository;
     }
+
+    #endregion
 
     public async Task<Unit> Handle(AddToOrderCommand request, CancellationToken cancellationToken)
     {

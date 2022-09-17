@@ -33,9 +33,7 @@ public class Order : EntityBase, IAggregateRoot
         }
 
         var existingItem = _orderDetails.FirstOrDefault(i => i.OrderId == Id && i.CatalogItemId == catalogItemId);
-        existingItem?.AddQuantity(quantity);
-
-        // Register new domain event
+        existingItem?.UpdateCount(quantity);
     }
 
     public void DeleteOrderDetail(OrderDetail detail)
@@ -47,7 +45,7 @@ public class Order : EntityBase, IAggregateRoot
     public void SetTotalPrice()
     {
         if (!IsPaid) return;
-        decimal total = _orderDetails.Sum(o => (o.ProductPrice * o.Count));
+        decimal total = _orderDetails.Sum(o => (o.Price * o.Count));
         TotalPrice = total;
     }
 

@@ -5,18 +5,18 @@ public class OrderDetail : EntityBase
     public int OrderId { get; private set; }
     public int CatalogItemId { get; private set; }
     public int Count { get; private set; }
-    public decimal ProductPrice { get; private set; }
+    public decimal Price { get; private set; }
 
     public CatalogItem CatalogItem { get; set; } = null!;
 
     private OrderDetail() { }
 
-    public OrderDetail(int orderId, int catalogItemId, int count, decimal productPrice)
+    public OrderDetail(int orderId, int catalogItemId, int count, decimal price)
     {
         OrderId = orderId;
         CatalogItemId = catalogItemId;
         Count = count;
-        ProductPrice = productPrice;
+        Price = price;
     }
 
     public void UpdateOrder(int orderId)
@@ -24,7 +24,7 @@ public class OrderDetail : EntityBase
         OrderId = Guard.Against.NegativeOrZero(orderId, nameof(orderId));
     }
 
-    public void UpdateProduct(int productId)
+    public void UpdateCatalog(int productId)
     {
         CatalogItemId = Guard.Against.NegativeOrZero(productId, nameof(productId));
     }
@@ -43,6 +43,6 @@ public class OrderDetail : EntityBase
 
     public void UpdateProductPrice(int productPrice)
     {
-        ProductPrice = Guard.Against.Negative(productPrice);
+        Price = Guard.Against.Negative(productPrice);
     }
 }
