@@ -36,7 +36,7 @@ public class AuthController : ApiBaseController
     {
         var response = new RegisterCustomerResponse(false);
 
-        if (!ModelState.IsValid || User.Identity!.IsAuthenticated)
+        if (User.Identity!.IsAuthenticated)
             return BadRequest(response);
 
         var user = new ApplicationUser()
@@ -82,7 +82,7 @@ public class AuthController : ApiBaseController
     {
         var response = new LoginCustomerResponse(false);
 
-        if (!ModelState.IsValid || User.Identity!.IsAuthenticated)
+        if (User.Identity!.IsAuthenticated)
             return BadRequest(response);
 
         var user = await _userManager.FindByEmailAsync(request.Email);

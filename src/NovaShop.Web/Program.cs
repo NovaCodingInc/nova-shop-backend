@@ -12,6 +12,7 @@ builder.Services.AddIdentity(builder.Configuration);
 builder.Services.AddControllers(options =>
     {
         options.Filters.Add(typeof(HttpGlobalExceptionFilter));
+        options.Filters.Add(typeof(ValidateModelStateFilter));
     })
     .AddJsonOptions(options => options.JsonSerializerOptions.WriteIndented = builder.Environment.IsDevelopment());
 builder.Services.AddSwagger();

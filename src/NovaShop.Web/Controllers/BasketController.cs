@@ -63,9 +63,6 @@ public class BasketController : ApiBaseController
     ]
     public async Task<ActionResult<AddToOrderResponseDTO>> AddToBasket([FromBody] AddToOrderDTO addToOrder)
     {
-        if (!ModelState.IsValid)
-            return BadRequest();
-
         var userId = User.GetUserId();
         var command = new AddToOrderCommand(userId, addToOrder.CatalogItemId, addToOrder.Count);
         var response = await _mediator.Send(command);
@@ -89,9 +86,6 @@ public class BasketController : ApiBaseController
     ]
     public async Task<IActionResult> UpdateBasket([FromBody] UpdateBasketDTO basket)
     {
-        if (!ModelState.IsValid)
-            return BadRequest();
-
         var userId = User.GetUserId();
         var updateCommand = new UpdateOrderDetailCommand(userId, basket.CatalogItemId, basket.Count);
         var result = await _mediator.Send(updateCommand);
