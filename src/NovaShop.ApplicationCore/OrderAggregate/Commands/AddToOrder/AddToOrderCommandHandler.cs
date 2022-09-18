@@ -41,7 +41,7 @@ public class AddToOrderCommandHandler : IRequestHandler<AddToOrderCommand, AddTo
             if (orderDetail == null) throw new BasketItemNotFoundException(order.Id);
 
             await _orderRepository.UpdateAsync(order, cancellationToken);
-            request.Count = orderDetail.Count;
+            response.Count = orderDetail.Count;
         }
 
         return response;
