@@ -1,6 +1,6 @@
-﻿namespace NovaShop.ApplicationCore.OrderAggregate.Commands.AddToOrderCommand;
+﻿namespace NovaShop.ApplicationCore.OrderAggregate.Commands.AddToOrder;
 
-public class AddToOrderCommand : IRequest
+public class AddToOrderCommand : IRequest<AddToOrderCommandResponse>
 {
     public string CustomerId { get; set; }
     public int CatalogItemId { get; set; }

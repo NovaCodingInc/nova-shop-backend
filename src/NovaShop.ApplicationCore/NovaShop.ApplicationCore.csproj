@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <Folder Include="Interfaces\" />
-    <Folder Include="OrderAggregate\Commands\AddToOrderCommand\" />
+    <Folder Include="OrderAggregate\Commands\AddToOrder\" />
     <Folder Include="OrderAggregate\Commands\DeleteOrderDetail\" />
     <Folder Include="OrderAggregate\Commands\UpdateOrderDetail\" />
     <Folder Include="OrderAggregate\Queries\GetCustomerBasket\" />

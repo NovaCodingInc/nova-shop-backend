@@ -1,6 +1,6 @@
-﻿namespace NovaShop.ApplicationCore.OrderAggregate.Commands.AddToOrderCommand;
+﻿namespace NovaShop.ApplicationCore.OrderAggregate.Commands.AddToOrder;
 
-public class AddToOrderCommandHandler : IRequestHandler<AddToOrderCommand>
+public class AddToOrderCommandHandler : IRequestHandler<AddToOrderCommand, AddToOrderCommandResponse>
 {
     #region constructor
 
@@ -16,16 +16,18 @@ public class AddToOrderCommandHandler : IRequestHandler<AddToOrderCommand>
 
     #endregion
 
-    public async Task<Unit> Handle(AddToOrderCommand request, CancellationToken cancellationToken)
+    public async Task<AddToOrderCommandResponse> Handle(AddToOrderCommand request, CancellationToken cancellationToken)
     {
+        var response = new AddToOrderCommandResponse();
+
         var getCatalogItemSpec = new GetCatalogItemSpec(request.CatalogItemId);
         var catalogItem = await _catalogItemRepository.AnyAsync(getCatalogItemSpec, cancellationToken);
 
         if (catalogItem)
         {
             var getOpenOrderSpec = new GetOpenOrderSpec(request.CustomerId);
-
             var order = await _orderRepository.FirstOrDefaultAsync(getOpenOrderSpec, cancellationToken);
+
             if (order == null)
             {
                 // new order
@@ -35,10 +37,13 @@ public class AddToOrderCommandHandler : IRequestHandler<AddToOrderCommand>
             }
 
             // after pay calculate product price
-            order.AddOrderDetail(request.CatalogItemId, 0, request.Count);
+            var orderDetail = order.AddOrderDetail(request.CatalogItemId, 0, request.Count);
+            if (orderDetail == null) throw new BasketItemNotFoundException(order.Id);
+
             await _orderRepository.UpdateAsync(order, cancellationToken);
+            request.Count = orderDetail.Count;
         }
 
-        return Unit.Value;
+        return response;
     }
 }

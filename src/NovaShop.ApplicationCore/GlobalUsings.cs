@@ -1,5 +1,6 @@
 ﻿global using Microsoft.EntityFrameworkCore;
 global using Microsoft.Extensions.Logging;
+global using NovaShop.ApplicationCore.Exceptions;
 global using NovaShop.ApplicationCore.CatalogAggregate.Events;
 global using NovaShop.ApplicationCore.CatalogAggregate;
 global using NovaShop.ApplicationCore.CatalogAggregate.Specification;

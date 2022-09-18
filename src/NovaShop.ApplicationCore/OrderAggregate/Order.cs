@@ -19,21 +19,23 @@ public class Order : EntityBase, IAggregateRoot
         IsPaid = isPaid;
     }
 
-    public void AddOrderDetail(int catalogItemId, decimal productPrice, int quantity = 1)
+    public OrderDetail? AddOrderDetail(int catalogItemId, decimal productPrice, int quantity = 1)
     {
-        if (IsPaid) return;
+        if (IsPaid) return null;
         Guard.Against.NegativeOrZero(catalogItemId, nameof(catalogItemId));
         Guard.Against.Negative(productPrice, nameof(productPrice));
         Guard.Against.Negative(quantity, nameof(quantity));
 
         if (_orderDetails.All(i => i.CatalogItemId != catalogItemId))
         {
-            _orderDetails.Add(new OrderDetail(Id, catalogItemId, quantity, productPrice));
-            return;
+            var newOrderDetail = new OrderDetail(Id, catalogItemId, quantity, productPrice);
+            _orderDetails.Add(newOrderDetail);
+            return newOrderDetail;
         }
 
-        var existingItem = _orderDetails.FirstOrDefault(i => i.OrderId == Id && i.CatalogItemId == catalogItemId);
-        existingItem?.UpdateCount(quantity);
+        var existingItem = _orderDetails.SingleOrDefault(i => i.OrderId == Id && i.CatalogItemId == catalogItemId);
+        existingItem?.AddQuantity(quantity);
+        return existingItem;
     }
 
     public void DeleteOrderDetail(OrderDetail detail)

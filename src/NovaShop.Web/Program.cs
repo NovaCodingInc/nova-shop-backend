@@ -9,7 +9,11 @@ builder.Services.AddDatabase(connectionString);
 
 builder.Services.AddAutoMapperProfile();
 builder.Services.AddIdentity(builder.Configuration);
-builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.WriteIndented = builder.Environment.IsDevelopment());
+builder.Services.AddControllers(options =>
+    {
+        options.Filters.Add(typeof(HttpGlobalExceptionFilter));
+    })
+    .AddJsonOptions(options => options.JsonSerializerOptions.WriteIndented = builder.Environment.IsDevelopment());
 builder.Services.AddSwagger();
 builder.Services.Configure<CatalogSettings>(builder.Configuration);
 builder.Services.AddCors(options =>

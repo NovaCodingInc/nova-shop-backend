@@ -52,7 +52,7 @@ public class BasketController : ApiBaseController
     #region add to basket
 
     [HttpPost]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(AddToOrderResponseDTO), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [SwaggerOperation(
@@ -61,15 +61,15 @@ public class BasketController : ApiBaseController
         OperationId = "Basket.AddToBasket",
         Tags = new[] { "Basket" })
     ]
-    public async Task<IActionResult> AddToBasket([FromBody] AddToOrderDTO addToOrder)
+    public async Task<ActionResult<AddToOrderResponseDTO>> AddToBasket([FromBody] AddToOrderDTO addToOrder)
     {
         if (!ModelState.IsValid)
             return BadRequest();
 
         var userId = User.GetUserId();
         var command = new AddToOrderCommand(userId, addToOrder.CatalogItemId, addToOrder.Count);
-        await _mediator.Send(command);
-        return Ok();
+        var response = await _mediator.Send(command);
+        return Ok(new AddToOrderResponseDTO(response.Count));
     }
 
     #endregion

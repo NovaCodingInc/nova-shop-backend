@@ -26,4 +26,9 @@
     <ProjectReference Include="..\NovaShop.Infrastructure\NovaShop.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Filters\" />
+    <Folder Include="ActionResults\" />
+  </ItemGroup>
+
 </Project>
